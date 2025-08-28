@@ -11,10 +11,10 @@ func main() {
 	var years float64
 	var expectedReturnRate float64
 
-	fmt.Print("Enter the investment amount: ")
+	OutputText("Enter the investment amount: ")
 	fmt.Scan(&investmentAmount)
 
-	fmt.Print("Enter the number of years: ")
+	OutputText("Enter the number of years: ")
 	fmt.Scan(&years)
 
 	fmt.Print("Enter the expected annual return rate (in %): ")
@@ -27,4 +27,8 @@ func main() {
 	realValue := fmt.Sprintf("Future Real Value: %.2f", futureRealValue)
 
 	fmt.Println(realValue)	
+}
+
+func OutputText(text string) {
+	fmt.Print(text)
 }
