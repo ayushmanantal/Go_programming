@@ -5,32 +5,36 @@ import (
 )
 
 func main() {
-	var revenue float64
-	var expenses float64
 	var taxRate float64
 
-	fmt.Println("Enter the total revenue:")
-	fmt.Scan(&revenue)
+	revenue := getUserInput("Enter the total revenue:")
 
-	fmt.Println("Enter the total expenses:")
-	fmt.Scan(&expenses)
+	expenses := getUserInput("Enter the total expenses:")
 
-	fmt.Println("Enter the tax rate (as a percentage):")
-	fmt.Scan(&taxRate)
+	taxRate = getUserInput("Enter the tax rate (in %):")
 
-	// Calculate profit before tax
-	profitBeforeTax := revenue - expenses
+	profitBeforeTax, taxAmount, profitAfterTax, ratio := CalculateProfit(revenue, expenses, taxRate)
+
 	fmt.Printf("Profit before tax: %.2f\n", profitBeforeTax)
 
-	// Calculate tax amount
-	taxAmount := (taxRate / 100) * profitBeforeTax
 	fmt.Printf("Tax amount: %.2f\n", taxAmount)
 
-	// Calculate profit after tax
-	profitAfterTax := profitBeforeTax - taxAmount
 	fmt.Printf("Profit after tax: %.2f\n", profitAfterTax)
 
-	// Calculate ratio
-	ratio := profitBeforeTax / profitAfterTax
 	fmt.Printf("Profit before tax to profit after tax ratio: %.2f\n", ratio)
+}
+
+func getUserInput(infoText string) float64 {
+	var userInput float64
+	fmt.Print(infoText)
+	fmt.Scan(&userInput)
+	return userInput
+}
+
+func CalculateProfit(revenue, expenses, taxRate float64) (float64, float64, float64, float64) {
+	profitBeforeTax := revenue - expenses
+	taxAmount := (taxRate / 100) * profitBeforeTax
+	profitAfterTax := profitBeforeTax - taxAmount
+	ratio := profitBeforeTax / profitAfterTax
+	return profitBeforeTax, taxAmount, profitAfterTax, ratio
 }
